@@ -9,11 +9,12 @@ namespace CMP1903_A1_2324
 {
     internal class Game
     {
+        //creates a private objects for the game 
         private Die _D1;
         private Die _D2;
         private Die _D3;
 
-
+        //initaites these in the constructor
         public Game()
         {
             _D1 = new Die();
@@ -30,15 +31,24 @@ namespace CMP1903_A1_2324
          */
 
         //Methods
+
+        /*
+         * sumup methods will roll all 3 dice 
+         * it will then add the dice together and return the result
+         */
         public int Sumup()
         {
+            //rolls 3 dice
             int D1Roll = _D1.roll();
             int D2Roll = _D2.roll();
             int D3Roll = _D3.roll();
+            //adds the 3 dice rolls rogether
             int result = D1Roll + D2Roll + D3Roll;
+            //returns the results from the method
             return result;
         }
 
+        //These methods will get and return all 3 of the dice objectsbut cannot be edited as it is a private object
         public Die d1
         {
             get { return _D1; }

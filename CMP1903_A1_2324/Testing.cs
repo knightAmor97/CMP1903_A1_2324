@@ -18,26 +18,39 @@ namespace CMP1903_A1_2324
          */
 
         //Method
-        public void testGame()
+        /*
+         * this method tests the game 
+         * It will get the current game sumup used in the program and test it after the start screen
+         * it will sum up results and compare them
+         */
+        public void testGame(Game currentGame)
         {
-            Game game = new Game();
-
-            int sumUpResult = game.Sumup();
+            
+            //stores the games sum up in results
+            int sumUpResult = currentGame.Sumup();
+            //clears console so nothing is displayed to the user while doing this 
             Console.Clear();
             
-
-            int expectedResults = game.d1.value + game.d2.value + game.d3.value;
+            //get the value of each die from the same game and adds them up
+            int expectedResults = currentGame.d1.value + currentGame.d2.value + currentGame.d3.value;
             
+            /* Debug Assert used to check the sumup results are the same as the expected results
+             * if false will error it will output an error window saying unexpected result
+             */
 
-            Debug.Assert(expectedResults == sumUpResult, "the games sumup numbers dont match with expected result");
+            Debug.Assert(expectedResults == sumUpResult, "unexpected result");
         }
-        public void testDie()
+        public void testDie(Die currentDie)
         {
-            Die die = new Die();
-
-            int rollResult = die.roll();
-
-            Debug.Assert(1 <= rollResult && rollResult <= 6, "die is rolling wrong");
+            //stores roll results
+            int rollResult = currentDie.roll();
+            //clears the console line so the output isnt shown
+            Console.Clear();
+            /*
+             * Debug.Assert used to check to see if its rolling in a range between 1 and 6
+             * if not it will display an error window of die is out of range 
+             */
+            Debug.Assert(1 <= rollResult && rollResult <= 6, "die roll out of range");
 
         }
     }
