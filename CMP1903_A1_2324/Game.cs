@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,8 +12,6 @@ namespace CMP1903_A1_2324
         private Die _D1;
         private Die _D2;
         private Die _D3;
-        private int _results;
-
 
 
         public Game()
@@ -38,6 +37,19 @@ namespace CMP1903_A1_2324
             int D3Roll = _D3.roll();
             int result = D1Roll + D2Roll + D3Roll;
             return result;
+        }
+
+        public Die d1
+        {
+            get { return _D1; }
+        }
+        public Die d2
+        {
+            get { return _D2; }
+        }
+        public Die d3
+        {
+            get { return _D3; }
         }
 
 
