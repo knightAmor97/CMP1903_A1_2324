@@ -21,7 +21,7 @@ namespace CMP1903_A1_2324
         private Random rand;
         private int _Value;
 
- 
+
         public Die()
         {
             rand = new Random();

@@ -33,14 +33,14 @@ namespace CMP1903_A1_2324
         //Methods
         public int Sumup()
         {
-            int D1Roll =_D1.roll();
+            int D1Roll = _D1.roll();
             int D2Roll = _D2.roll();
             int D3Roll = _D3.roll();
             int result = D1Roll + D2Roll + D3Roll;
             return result;
         }
 
-        
+
 
 
     }
