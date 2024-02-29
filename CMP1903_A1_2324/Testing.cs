@@ -18,5 +18,27 @@ namespace CMP1903_A1_2324
          */
 
         //Method
+        public void testGame()
+        {
+            Game game = new Game();
+
+            int sumUpResult = game.Sumup();
+            Console.Clear();
+            
+
+            int expectedResults = game.d1.value + game.d2.value + game.d3.value;
+            
+
+            Debug.Assert(expectedResults == sumUpResult, "the games sumup numbers dont match with expected result");
+        }
+        public void testDie()
+        {
+            Die die = new Die();
+
+            int rollResult = die.roll();
+
+            Debug.Assert(1 <= rollResult && rollResult <= 6, "die is rolling wrong");
+
+        }
     }
 }

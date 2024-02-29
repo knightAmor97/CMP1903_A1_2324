@@ -36,6 +36,9 @@ namespace CMP1903_A1_2324
             return _Value;
         }
 
-
+        public int value
+        {
+            get { return _Value; }
+        }
     }
 }
