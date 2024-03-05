@@ -39,24 +39,26 @@ namespace CMP1903_A1_2324
                 //asks user if they want to reroll
                 Console.WriteLine("would you like to reroll(y/n)");
                 string answer = Console.ReadLine();
+                // if they answered yes it will go thrugh the amountOfRolls, reroll and then it will display all the statistics
                 if (answer == "y")
                 {
                     game.AmountOfRolls();
                     game.reroll();
                     game.displayInformation();
+                    //this will exit the loop
                     EnteredCorrectly = true;
                 }
+                // if they dont want to reroll it exit the loop
                 else if (answer == "n")
                 {
                     EnteredCorrectly = true;
                 }
+                // if the user didnt enter a correct answer it will ask them to input again
                 else
                 {
                     Console.WriteLine("didnt enter a right input please try again");
                 }
             } while (EnteredCorrectly == false);
-            
-
             Console.ReadKey();
             
             
