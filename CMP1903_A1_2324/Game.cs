@@ -28,12 +28,20 @@ namespace CMP1903_A1_2324
         private Die _D1;
         private Die _D2;
         private Die _D3;
+        private int _D1Roll;
+        private int _D2Roll;
+        private int _D3Roll;
         private int _result;
         private int _noOfRolls;
         //list is created in order to store the results 
         private List<int> _results;
+        private int _sumOfAll;
+        private double _average;
+        private int _minResult;
+        private int _maxResult;
 
-        //polymorphism is used in order to change the values but they cannot be edited outside the program
+
+        //Encapsulation is used in order to change the values but they cannot be edited outside the program
         public Die D1
         {
             get { return _D1; }
@@ -48,6 +56,22 @@ namespace CMP1903_A1_2324
         {
             get { return _D3; }
             set { _D3 = value; }
+        }
+
+        public int D1Roll
+        {
+            get { return _D1Roll; }
+            set { _D1Roll = value; }
+        }
+        public int D2Roll
+        {
+            get { return _D2Roll; }
+            set { _D2Roll = value; }
+        }
+        public int D3Roll
+        {
+            get { return _D3Roll; }
+            set { _D3Roll = value; }
         }
 
         public int result
@@ -65,33 +89,51 @@ namespace CMP1903_A1_2324
             get { return _results; }
             set { _results = value; }
         }
+
+        public int sumOfAll
+        {
+            get { return _sumOfAll; }
+            set { _sumOfAll = value; }
+        }
+
+        public double average
+        {
+            get { return _average; }
+            set { _average = value; }
+        }
+
+        public int minResult
+        {
+            get { return _minResult; }
+            set { _minResult = value; }
+        }
+
+        public int maxResult
+        {
+            get { return _maxResult; }
+            set { _maxResult = value; }
+        }
+
         //constructor for the class
         public Game()
         {
+            //creates the die classes and assigns them to the variables
             D1 = new Die();
             D2 = new Die();
             D3 = new Die();
-            result = 0;
+            //creates the list
             results = new List<int>();
             
         }
-        /*
-         * these are the methods for this class
-         * SumUp should addup all 3 die and then store the results inside the the list it will then return it
-         * amountOfRolls allows the user to reroll as many times as the user wants
-         * reRoll rerolls the die from the amount the user has given
-         * addUpAll should add up all the dies roll together
-         * averageDie will take all the die added up together then divide it by the amount the user has asked to reroll
-         * minResults will find the minimum score of what the user got
-         * maxResults will find the max score the user got
-         * displayInformation will display all the data gathered
-         */
+
+
+
         public int Sumup()
         {
             //rolls 3 dice
-            int D1Roll = D1.roll();
-            int D2Roll = D2.roll();
-            int D3Roll = D3.roll();
+            D1Roll = D1.roll();
+            D2Roll = D2.roll();
+            D3Roll = D3.roll();
 
             //adds the 3 dice rolls rogether
             result = D1Roll + D2Roll + D3Roll;
@@ -103,13 +145,42 @@ namespace CMP1903_A1_2324
 
         public void AmountOfRolls()
         {
-            //asks how much the user wants to roll then takes the users input
-            Console.WriteLine("How many times would you like to reroll");
-            int numberOfRolls = int.Parse(Console.ReadLine());
-            // will set the built in variable to what the user has inputted
-            noOfRolls = numberOfRolls;
+            //uses a do while loop so that the user can have as alot of attempts to input a correct input
+            bool inputtedCorrectly = false;
+            do
+            {
+                //uses a try and except method so ther are no errornous inputs when inputting the amopount of times to roll
+                try
+                {
+                    //asks how much the user wants to roll then takes the users input
+                    Console.WriteLine("How many times would you like to reroll");
+                    int numberOfRolls = int.Parse(Console.ReadLine());
+                    //this checks if the user has inputted a number less than 0
+                    if (numberOfRolls <= 0) 
+                    {
+                        //if true it will output a message and retry
+                        Console.WriteLine("the number is too small please try again");
+                    
+                    }
+                    else
+                    {
+                        // will set the built in variable to what the user has inputted
+                        noOfRolls = numberOfRolls;
+                        //exits the loop
+                        inputtedCorrectly = true;
+                    }
+                    
 
-
+                }
+                //catches any errounous inputs
+                catch (Exception e)
+                {
+                    //prints a message if the user has not inputted a number
+                    Console.WriteLine(e.Message + " please try again");
+                }
+            }
+            //breaks out of loop when the user has inputted a correct input
+            while(inputtedCorrectly == false);
         }
 
         
@@ -122,6 +193,8 @@ namespace CMP1903_A1_2324
             {
                 // adds up and stores the scores the rolls given and stores it in the list
                 sumUp = Sumup();
+                Console.WriteLine($"The sum of the die is {sumUp}");
+                Console.WriteLine();
 
             }
         }
@@ -129,38 +202,38 @@ namespace CMP1903_A1_2324
         public int AddUpAll()
         {
             //sets the sumOfAlll variable
-            int SumOfAll = 0;
+            sumOfAll = 0;
             //loops through the list 
             for(int i = 0; i < results.Count; i++)
             {
                 //adds all the results it gathered together
-                SumOfAll += results[i];
+                sumOfAll += results[i];
             }
             //returns the results together
-            return SumOfAll;
+            return sumOfAll;
         }
         public double averageDie()
         {
             //sets up a variable and assigns it to the addUpall method
             int sumOfAll = AddUpAll();
             //gets the total amount of die and dividing it by the amount of die there is (gotten by taking the noOfRolls x3) to get the average
-            double average = (double)sumOfAll / (noOfRolls *3);
+            double average = (double)sumOfAll / (noOfRolls * 3 +3);
             //returns a rounded result (rounded by 2 dp)
             return Math.Round(average, 2);
         }
 
-        public int minResult()
+        public int MinResult()
         {
             //finds the minimum result that the user got
-            int minResult = results.Min();
+            minResult = results.Min();
             //returns the minimum result
             return minResult;
         }
 
-        public int maxResult()
+        public int MaxResult()
         {
             //finds the maximum result that the user got
-            int maxResult = results.Max();
+            maxResult = results.Max();
             //returns the result
             return maxResult;
         }
@@ -168,10 +241,10 @@ namespace CMP1903_A1_2324
         public void displayInformation()
         {
             //outputs the average, min, max scores and the sum up all the scores the user got
-            Console.WriteLine($" sum of all the die: {AddUpAll()}");
-            Console.WriteLine($"average score the user got: {averageDie()}");
-            Console.WriteLine($"minimum score you got: {minResult()}");
-            Console.WriteLine($"maximum score the user got: {maxResult()}");
+            Console.WriteLine($"sum of all the die: {AddUpAll()}");
+            Console.WriteLine($"average die the you got: {averageDie()}");
+            Console.WriteLine($"minimum score you got: {MinResult()}");
+            Console.WriteLine($"maximum score the you got: {MaxResult()}");
         }
 
     }

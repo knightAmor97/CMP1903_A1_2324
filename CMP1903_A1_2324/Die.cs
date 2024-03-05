@@ -22,6 +22,7 @@ namespace CMP1903_A1_2324
         //use a static here in order to get a different number from each class
         private static Random _rand;
         private int _Value;
+        //encapsulation used in order to change the values without it being changed outside the class
         public int Value
         {
             get { return _Value; }
@@ -36,15 +37,14 @@ namespace CMP1903_A1_2324
         public Die()
         {
             rand = new Random();
+            Value = 0;
         }
-
-        
 
         //Method
 
         /*
-         This method should generate a random value from 1-6 then return the value
-         */
+         * This method should generate a random value from 1-6 then return the value
+        */
         public int roll()
         {
             //Generates a value from 1 to 6 (its 1-7 as it will do 1 less then the orginal)

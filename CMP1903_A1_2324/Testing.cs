@@ -39,6 +39,8 @@ namespace CMP1903_A1_2324
              */
 
             Debug.Assert(expectedResults == sumUpResult, "unexpected result");
+            //checks to see if the results are within range, if not true it will it will output that the results arent within range
+            Debug.Assert(sumUpResult < 18 && sumUpResult > 3, "results are not within range");
         }
         public void testDie(Die currentDie)
         {

@@ -33,7 +33,7 @@ namespace CMP1903_A1_2324
             Console.WriteLine($"The sum of the amount of die is {totalOfDie}");
             bool EnteredCorrectly = false;
             
-            // do loop used so the user doesnt input something else
+            // do loop used so the used so the user has lots of attempts to write a correct input
             do
             {
                 //asks user if they want to reroll
@@ -58,7 +58,9 @@ namespace CMP1903_A1_2324
                 {
                     Console.WriteLine("didnt enter a right input please try again");
                 }
-            } while (EnteredCorrectly == false);
+            }
+            //breaks out of loop when the user has inputted a correct input
+            while (EnteredCorrectly == false);
             Console.ReadKey();
             
             
