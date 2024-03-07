@@ -17,7 +17,6 @@ namespace CMP1903_A1_2324
              * Create a Testing object to verify the output and operation of the other classes.
              * 
              */
-
             //creates a game object
             Game game = new Game();
             //creates a testing object
@@ -27,13 +26,49 @@ namespace CMP1903_A1_2324
             Console.WriteLine("Press any key to start: ");
             Console.ReadKey();
             //tests the die and game first before starting
-            test.testDie(game.d1);
+            Console.WriteLine("Testing Phase:");
+            test.testDie(game.dice1);
             test.testGame(game);
+            //tells user when the test has been completed
+            Console.WriteLine("Testing Completed");
+            //allows user to check the die is rolling correctly
+            Console.ReadLine();
+            //clears the testing phase before the start of the game 
+            Console.Clear();
             //outputs the total of the die 
-            int totalOfDie = game.Sumup();
+            int totalOfDie = game.SumUp();
             Console.WriteLine($"The sum of the amount of die is {totalOfDie}");
-            Console.ReadKey();
+            bool EnteredCorrectly = false;
             
+            //do loop used so the used so the user has lots of attempts to write a correct input
+            do
+            {
+                //asks user if they want to reroll
+                Console.WriteLine("would you like to reroll(y/n)");
+                string answer = Console.ReadLine();
+                // if they answered yes it will go thrugh the amountOfRolls, reroll and then it will display all the statistics
+                if (answer == "y")
+                { 
+                    game.AmountOfRolls();
+                    game.ReRoll();
+                    game.DisplayInformation();
+                    //this will exit the loop
+                    EnteredCorrectly = true;
+                }
+                // if they dont want to reroll it exit the loop and end the game 
+                else if (answer == "n")
+                {
+                    EnteredCorrectly = true;
+                }
+                // if the user didnt enter a correct answer it will ask them to input again
+                else
+                {
+                    Console.WriteLine("didnt enter a right input please try again");
+                }
+            }
+            //breaks out of loop when the user has inputted a correct input
+            while (EnteredCorrectly == false);
+            Console.ReadKey();
             
             
 
