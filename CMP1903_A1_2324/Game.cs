@@ -25,60 +25,50 @@ namespace CMP1903_A1_2324
 
 
         //creates a private objects for the game 
-        private Die _D1;
-        private Die _D2;
-        private Die _D3;
-        private int _D1Roll;
-        private int _D2Roll;
-        private int _D3Roll;
-        private int _result;
+        private Die _dice1;
+        private Die _dice2;
+        private Die _dice3;
+        private int _dice1Roll;
+        private int _dice2Roll;
+        private int _dice3Roll;
         private int _noOfRolls;
         //list is created in order to store the results 
         private List<int> _results;
-        private int _sumOfAll;
-        private double _average;
-        private int _minResult;
-        private int _maxResult;
 
 
         //Encapsulation is used in order to change the values but they cannot be edited outside the program
-        public Die D1
+        public Die dice1
         {
-            get { return _D1; }
-            set { _D1 = value; }
+            get { return _dice1; }
+            set { _dice1 = value; }
         }
-        public Die D2
+        public Die dice2
         {
-            get { return _D2; }
-            set { _D2 = value; }
+            get { return _dice2; }
+            set { _dice2 = value; }
         }
-        public Die D3
+        public Die dice3
         {
-            get { return _D3; }
-            set { _D3 = value; }
-        }
-
-        public int D1Roll
-        {
-            get { return _D1Roll; }
-            set { _D1Roll = value; }
-        }
-        public int D2Roll
-        {
-            get { return _D2Roll; }
-            set { _D2Roll = value; }
-        }
-        public int D3Roll
-        {
-            get { return _D3Roll; }
-            set { _D3Roll = value; }
+            get { return _dice3; }
+            set { _dice3 = value; }
         }
 
-        public int result
+        public int dice1Roll
         {
-            get { return _result; }
-            set { _result = value; }
+            get { return _dice1Roll; }
+            set { _dice1Roll = value; }
         }
+        public int dice2Roll
+        {
+            get { return _dice2Roll; }
+            set { _dice2Roll = value; }
+        }
+        public int dice3Roll
+        {
+            get { return _dice3Roll; }
+            set { _dice3Roll = value; }
+        }
+
         public int noOfRolls
         {
             get { return _noOfRolls; }
@@ -90,37 +80,15 @@ namespace CMP1903_A1_2324
             set { _results = value; }
         }
 
-        public int sumOfAll
-        {
-            get { return _sumOfAll; }
-            set { _sumOfAll = value; }
-        }
 
-        public double average
-        {
-            get { return _average; }
-            set { _average = value; }
-        }
-
-        public int minResult
-        {
-            get { return _minResult; }
-            set { _minResult = value; }
-        }
-
-        public int maxResult
-        {
-            get { return _maxResult; }
-            set { _maxResult = value; }
-        }
 
         //constructor for the class
         public Game()
         {
             //creates the die classes and assigns them to the variables
-            D1 = new Die();
-            D2 = new Die();
-            D3 = new Die();
+            dice1 = new Die();
+            dice2 = new Die();
+            dice3 = new Die();
             //creates the list
             results = new List<int>();
             
@@ -128,15 +96,15 @@ namespace CMP1903_A1_2324
 
 
 
-        public int Sumup()
+        public int SumUp()
         {
             //rolls 3 dice
-            D1Roll = D1.roll();
-            D2Roll = D2.roll();
-            D3Roll = D3.roll();
+            dice1Roll = dice1.Roll();
+            dice2Roll = dice2.Roll();
+            dice3Roll = dice3.Roll();
 
             //adds the 3 dice rolls rogether
-            result = D1Roll + D2Roll + D3Roll;
+            int result = dice1Roll + dice2Roll + dice3Roll;
             //adds the results to the list
             results.Add(result);
             //returns the results from the method
@@ -184,7 +152,7 @@ namespace CMP1903_A1_2324
         }
 
         
-        public void reroll()
+        public void ReRoll()
         {
             //sets the sumUp variable
             int sumUp = 0;
@@ -192,7 +160,7 @@ namespace CMP1903_A1_2324
             for (int i = 0; i < noOfRolls; i++)
             {
                 // adds up and stores the scores the rolls given and stores it in the list
-                sumUp = Sumup();
+                sumUp = SumUp();
                 Console.WriteLine($"The sum of the die is {sumUp}");
                 Console.WriteLine();
 
@@ -202,7 +170,7 @@ namespace CMP1903_A1_2324
         public int AddUpAll()
         {
             //sets the sumOfAlll variable
-            sumOfAll = 0;
+            int sumOfAll = 0; 
             //loops through the list 
             for(int i = 0; i < results.Count; i++)
             {
@@ -212,12 +180,12 @@ namespace CMP1903_A1_2324
             //returns the results together
             return sumOfAll;
         }
-        public double averageDie()
+        public double AverageDie()
         {
             //sets up a variable and assigns it to the addUpall method
             int sumOfAll = AddUpAll();
             //gets the total amount of die and dividing it by the amount of die there is (gotten by taking the noOfRolls x3) to get the average
-            double average = (double)sumOfAll / (noOfRolls * 3 +3);
+            double average = (double)sumOfAll / (noOfRolls * 3 + 3);
             //returns a rounded result (rounded by 2 dp)
             return Math.Round(average, 2);
         }
@@ -225,7 +193,7 @@ namespace CMP1903_A1_2324
         public int MinResult()
         {
             //finds the minimum result that the user got
-            minResult = results.Min();
+            int minResult = results.Min();
             //returns the minimum result
             return minResult;
         }
@@ -233,16 +201,16 @@ namespace CMP1903_A1_2324
         public int MaxResult()
         {
             //finds the maximum result that the user got
-            maxResult = results.Max();
+            int maxResult = results.Max();
             //returns the result
             return maxResult;
         }
 
-        public void displayInformation()
+        public void DisplayInformation()
         {
             //outputs the average, min, max scores and the sum up all the scores the user got
             Console.WriteLine($"sum of all the die: {AddUpAll()}");
-            Console.WriteLine($"average die the you got: {averageDie()}");
+            Console.WriteLine($"average die the you got: {AverageDie()}");
             Console.WriteLine($"minimum score you got: {MinResult()}");
             Console.WriteLine($"maximum score the you got: {MaxResult()}");
         }

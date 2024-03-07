@@ -26,14 +26,21 @@ namespace CMP1903_A1_2324
             Console.WriteLine("Press any key to start: ");
             Console.ReadKey();
             //tests the die and game first before starting
-            test.testDie(game.D1);
+            Console.WriteLine("Testing Phase:");
+            test.testDie(game.dice1);
             test.testGame(game);
+            //tells user when the test has been completed
+            Console.WriteLine("Testing Completed");
+            //allows user to check the die is rolling correctly
+            Console.ReadLine();
+            //clears the testing phase before the start of the game 
+            Console.Clear();
             //outputs the total of the die 
-            int totalOfDie = game.Sumup();
+            int totalOfDie = game.SumUp();
             Console.WriteLine($"The sum of the amount of die is {totalOfDie}");
             bool EnteredCorrectly = false;
             
-            // do loop used so the used so the user has lots of attempts to write a correct input
+            //do loop used so the used so the user has lots of attempts to write a correct input
             do
             {
                 //asks user if they want to reroll
@@ -41,14 +48,14 @@ namespace CMP1903_A1_2324
                 string answer = Console.ReadLine();
                 // if they answered yes it will go thrugh the amountOfRolls, reroll and then it will display all the statistics
                 if (answer == "y")
-                {
+                { 
                     game.AmountOfRolls();
-                    game.reroll();
-                    game.displayInformation();
+                    game.ReRoll();
+                    game.DisplayInformation();
                     //this will exit the loop
                     EnteredCorrectly = true;
                 }
-                // if they dont want to reroll it exit the loop
+                // if they dont want to reroll it exit the loop and end the game 
                 else if (answer == "n")
                 {
                     EnteredCorrectly = true;

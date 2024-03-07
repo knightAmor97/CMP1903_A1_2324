@@ -21,12 +21,12 @@ namespace CMP1903_A1_2324
         //creates a private value variable inside the class and rand
         //use a static here in order to get a different number from each class
         private static Random _rand;
-        private int _Value;
+        private int _value;
         //encapsulation used in order to change the values without it being changed outside the class
-        public int Value
+        public int value
         {
-            get { return _Value; }
-            set { _Value = value; }
+            get { return _value; }
+            set { _value = value; }
         }
         public Random rand
         {
@@ -37,7 +37,6 @@ namespace CMP1903_A1_2324
         public Die()
         {
             rand = new Random();
-            Value = 0;
         }
 
         //Method
@@ -45,14 +44,14 @@ namespace CMP1903_A1_2324
         /*
          * This method should generate a random value from 1-6 then return the value
         */
-        public int roll()
+        public int Roll()
         {
             //Generates a value from 1 to 6 (its 1-7 as it will do 1 less then the orginal)
-            Value = rand.Next(1, 7);
+            value = rand.Next(1, 7);
             //outputs the rolled value
-            Console.WriteLine($"rolled a {Value}");
+            Console.WriteLine($"rolled a {value}");
             //returns value
-            return Value;
+            return value;
         }
         //gets the value from the private variable 
 

@@ -27,12 +27,10 @@ namespace CMP1903_A1_2324
         {
             
             //stores the games sum up in results
-            int sumUpResult = currentGame.Sumup();
-            //clears console so nothing is displayed to the user while doing this 
-            Console.Clear();
+            int sumUpResult = currentGame.SumUp();
             
             //get the value of each die from the same game and adds them up
-            int expectedResults = currentGame.D1.Value + currentGame.D2.Value + currentGame.D3.Value;
+            int expectedResults = currentGame.dice1Roll + currentGame.dice2Roll + currentGame.dice3Roll;
             
             /* Debug Assert used to check the sumup results are the same as the expected results
              * if false will error it will output an error window saying unexpected result
@@ -50,16 +48,15 @@ namespace CMP1903_A1_2324
             for (int i = 0; i < 100; i++) 
             {
                 //stores roll results
-                int rollResult = currentDie.roll();
-                //clears the console line so the output isnt shown
-                Console.Clear();
+                int rollResult = currentDie.Roll();
+                /*
+                 * Debug.Assert used to check to see if its rolling in a range between 1 and 6
+                 * if not it will display an error window of die is out of range 
+                 */
+
                 Debug.Assert(1 <= rollResult && rollResult <= 6, "die roll out of range");
             }
-            /*
-             * Debug.Assert used to check to see if its rolling in a range between 1 and 6
-             * if not it will display an error window of die is out of range 
-             */
-
+        
         }
     }
 }
