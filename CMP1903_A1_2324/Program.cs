@@ -4,77 +4,69 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace CMP1903_A1_2324
 {
     internal class Program
     {
+
+        
         static void Main(string[] args)
         {
-            /*
-             *
-             * Create a Game object and call its methods.
-             * Create a Testing object to verify the output and operation of the other classes.
-             * 
-             */
-            //creates a game object
-            Game game = new Game();
-            //creates a testing object
+            //creates the games, testing and statistics classes
+            SevensOut sevensOut = new SevensOut();
+            ThreeOrMore threeOrMore = new ThreeOrMore();
             Testing test = new Testing();
-            //outputs a starting screen before entering the game
-            Console.WriteLine("Welcome to the Dice game");
-            Console.WriteLine("Press any key to start: ");
-            Console.ReadKey();
-            //tests the die and game first before starting
-            Console.WriteLine("Testing Phase:");
-            test.testDie(game.dice1);
-            test.testGame(game);
-            //tells user when the test has been completed
-            Console.WriteLine("Testing Completed");
-            //allows user to check the die is rolling correctly
-            Console.ReadLine();
-            //clears the testing phase before the start of the game 
-            Console.Clear();
-            //outputs the total of the die 
-            int totalOfDie = game.SumUp();
-            Console.WriteLine($"The sum of the amount of die is {totalOfDie}");
-            bool EnteredCorrectly = false;
-            
-            //do loop used so the used so the user has lots of attempts to write a correct input
+            Statistics statistics = new Statistics(sevensOut, threeOrMore);
+
+            //uses do loop for the user
+            bool endChoice = false;
             do
             {
-                //asks user if they want to reroll
-                Console.WriteLine("would you like to reroll(y/n)");
-                string answer = Console.ReadLine();
-                // if they answered yes it will go thrugh the amountOfRolls, reroll and then it will display all the statistics
-                if (answer == "y")
-                { 
-                    game.AmountOfRolls();
-                    game.ReRoll();
-                    game.DisplayInformation();
-                    //this will exit the loop
-                    EnteredCorrectly = true;
-                }
-                // if they dont want to reroll it exit the loop and end the game 
-                else if (answer == "n")
+                //asks user to input an option
+                Console.WriteLine("please select an opion below");
+                Console.WriteLine("sevens out");
+                Console.WriteLine("three or more");
+                Console.WriteLine("Statistics ");
+                Console.WriteLine("testing");
+                Console.WriteLine("exit");
+                //set to lower to reduce errornous input
+                string choice = Console.ReadLine().ToLower();
+                //switch case used for choice 
+                switch(choice)
                 {
-                    EnteredCorrectly = true;
+                    //if the chose sevens out they will go straight to choosing if they want to go 2 player or CPU
+                    case "sevens out":
+                        sevensOut.PlayerChoiceAgainst();
+                        break;
+                    //if they chose three or more they will go straight to choosing if they want to go 2 player or CPU
+                    case "three or more":
+                        threeOrMore.PlayerChoiceAgainst();
+                        break;
+                    // if they chose statistics it will display the stats they got from the games
+                    case "statistics":
+                        statistics.DisplayStats();
+                        break;
+                    //testing will test the entire game 
+                    case "testing":
+                        test.TestSevensOut();
+                        test.TestThreeOrMore();
+                        test.TestDie();
+                        break;
+                    //exit will end the loop and quit the program
+                    case "exit":
+                        endChoice = true;
+                        break;
+                    //default will be used for any errornous inputs
+                    default:
+                        Console.WriteLine("error, please try again");
+                        break;
+
                 }
-                // if the user didnt enter a correct answer it will ask them to input again
-                else
-                {
-                    Console.WriteLine("didnt enter a right input please try again");
-                }
-            }
-            //breaks out of loop when the user has inputted a correct input
-            while (EnteredCorrectly == false);
-            Console.ReadKey();
+
+            } while (endChoice == false);
             
-            
-
-
-
-
         }
     }
 }

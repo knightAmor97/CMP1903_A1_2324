@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324
 {
-    internal class Game
+    //abstract class is used
+    internal abstract class Game
     {
 
        /*
@@ -24,7 +26,7 @@ namespace CMP1903_A1_2324
          */
 
 
-        //creates a private objects for the game 
+        //creates a private variables for the game 
         private Die _dice1;
         private Die _dice2;
         private Die _dice3;
@@ -32,8 +34,8 @@ namespace CMP1903_A1_2324
         private int _dice2Roll;
         private int _dice3Roll;
         private int _noOfRolls;
+        private int[] _diceRolls;
         //list is created in order to store the results 
-        private List<int> _results;
 
 
         //Encapsulation is used in order to change the values but they cannot be edited outside the program
@@ -74,12 +76,12 @@ namespace CMP1903_A1_2324
             get { return _noOfRolls; }
             set { _noOfRolls = value; }
         }
-        public List<int> results
-        {
-            get { return _results; }
-            set { _results = value; }
-        }
 
+        public int[] diceRolls
+        {
+            get { return _diceRolls; }
+            set { _diceRolls = value;}
+        }
 
 
         //constructor for the class
@@ -89,130 +91,38 @@ namespace CMP1903_A1_2324
             dice1 = new Die();
             dice2 = new Die();
             dice3 = new Die();
+            diceRolls = new int[3];
             //creates the list
-            results = new List<int>();
-            
+
         }
 
-
-
-        public int SumUp()
+        //set as virtual to override this function
+        /// <summary>
+        /// rolls three dice then returns the array
+        /// </summary>
+        /// <returns>returns the array</returns>
+        public virtual int[] RollAllDice()
         {
-            //rolls 3 dice
-            dice1Roll = dice1.Roll();
-            dice2Roll = dice2.Roll();
-            dice3Roll = dice3.Roll();
-
-            //adds the 3 dice rolls rogether
-            int result = dice1Roll + dice2Roll + dice3Roll;
-            //adds the results to the list
-            results.Add(result);
-            //returns the results from the method
-            return result;
+            //rolls 3 dice    
+            diceRolls[0] = dice1.Roll();
+            diceRolls[1] = dice2.Roll();
+            diceRolls[2] = dice3.Roll();
+            //returns the array of the three dice that were rolled 
+            return diceRolls;
         }
 
-        public void AmountOfRolls()
+        /// <summary>
+        /// Will output the dice rolled
+        /// </summary>
+        /// <param name="array"></param>
+        public void PrintDiceRolls(int[] array)
         {
-            //uses a do while loop so that the user can have as alot of attempts to input a correct input
-            bool inputtedCorrectly = false;
-            do
+            Console.Write("you rolled a ");
+            for (int i = 0; i < array.Length; i++)
             {
-                //uses a try and except method so ther are no errornous inputs when inputting the amopount of times to roll
-                try
-                {
-                    //asks how much the user wants to roll then takes the users input
-                    Console.WriteLine("How many times would you like to reroll");
-                    int numberOfRolls = int.Parse(Console.ReadLine());
-                    //this checks if the user has inputted a number less than 0
-                    if (numberOfRolls <= 0) 
-                    {
-                        //if true it will output a message and retry
-                        Console.WriteLine("the number is too small please try again");
-                    
-                    }
-                    else
-                    {
-                        // will set the built in variable to what the user has inputted
-                        noOfRolls = numberOfRolls;
-                        //exits the loop
-                        inputtedCorrectly = true;
-                    }
-                    
-
-                }
-                //catches any errounous inputs
-                catch (Exception e)
-                {
-                    //prints a message if the user has not inputted a number
-                    Console.WriteLine(e.Message + " please try again");
-                }
+                Console.Write($"{array[i]},");
             }
-            //breaks out of loop when the user has inputted a correct input
-            while(inputtedCorrectly == false);
-        }
-
-        
-        public void ReRoll()
-        {
-            //sets the sumUp variable
-            int sumUp = 0;
-            //loopd through the amount the users inputted 
-            for (int i = 0; i < noOfRolls; i++)
-            {
-                // adds up and stores the scores the rolls given and stores it in the list
-                sumUp = SumUp();
-                Console.WriteLine($"The sum of the die is {sumUp}");
-                Console.WriteLine();
-
-            }
-        }
-
-        public int AddUpAll()
-        {
-            //sets the sumOfAlll variable
-            int sumOfAll = 0; 
-            //loops through the list 
-            for(int i = 0; i < results.Count; i++)
-            {
-                //adds all the results it gathered together
-                sumOfAll += results[i];
-            }
-            //returns the results together
-            return sumOfAll;
-        }
-        public double AverageDie()
-        {
-            //sets up a variable and assigns it to the addUpall method
-            int sumOfAll = AddUpAll();
-            //gets the total amount of die and dividing it by the amount of die there is (gotten by taking the noOfRolls x3) to get the average
-            double average = (double)sumOfAll / (noOfRolls * 3 + 3);
-            //returns a rounded result (rounded by 2 dp)
-            return Math.Round(average, 2);
-        }
-
-        public int MinResult()
-        {
-            //finds the minimum result that the user got
-            int minResult = results.Min();
-            //returns the minimum result
-            return minResult;
-        }
-
-        public int MaxResult()
-        {
-            //finds the maximum result that the user got
-            int maxResult = results.Max();
-            //returns the result
-            return maxResult;
-        }
-
-        public void DisplayInformation()
-        {
-            //outputs the average, min, max scores and the sum up all the scores the user got
-            Console.WriteLine($"sum of all the die: {AddUpAll()}");
-            Console.WriteLine($"average die the you got: {AverageDie()}");
-            Console.WriteLine($"minimum score you got: {MinResult()}");
-            Console.WriteLine($"maximum score the you got: {MaxResult()}");
+            Console.WriteLine();
         }
 
     }
